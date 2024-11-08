@@ -1,0 +1,65 @@
+<!-- cliente.component.html -->
+<div class="container mt-4">
+  <h2>Formulario de Consulta de Documento</h2>
+
+  <!-- Formulario -->
+  <form (ngSubmit)="onSubmit()" #documentoForm="ngForm">
+    <!-- Tipo de documento -->
+    <div class="mb-3">
+      <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
+      <select
+        id="tipoDocumento"
+        class="form-select"
+        [(ngModel)]="tipoDocumento"
+        name="tipoDocumento"
+        required
+      >
+        <option value="C">Cédula de Ciudadanía (C)</option>
+        <option value="P">Pasaporte (P)</option>
+      </select>
+    </div>
+
+    <!-- Número de identificación -->
+    <div class="mb-3">
+      <label for="numeroDocumento" class="form-label">Número de Identificación</label>
+      <input
+        type="text"
+        id="numeroDocumento"
+        class="form-control"
+        placeholder="Ingrese el número de identificación"
+        [(ngModel)]="numeroDocumento"
+        name="numeroDocumento"
+        required
+      />
+    </div>
+
+    <!-- Botón de consulta -->
+    <div class="mb-3">
+      <!-- Botón de envío -->
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!documentoForm.form.valid">
+        Consultar
+      </button>
+    </div>
+  </form>
+
+  <!-- Mostrar resultado -->
+  
+    <div *ngIf="conflicto" class="alert alert-warning mt-3" role="alert">
+      {{conflicto}}
+  </div>
+    <div *ngIf="resultado" class="alert alert-success">
+      <strong>Resultado encontrado:</strong>
+      <ul>
+        <li><strong>Nombre:</strong> {{ resultado.nombre }}</li>
+        <li><strong>SegundoNombre:</strong> {{ resultado.segundoNombre}}</li>
+        <li><strong>Apellido:</strong> {{ resultado.apellido }}</li>
+        <li><strong>SegundoApellido:</strong> {{ resultado.segundoApellido }}</li>
+        <li><strong>Teléfono:</strong> {{ resultado.telefono }}</li>
+        <li><strong>Direccion:</strong> {{ resultado.direccion }}</li>
+        <li><strong>Ciudad:</strong> {{ resultado.ciudad }}</li>
+      </ul>
+    </div>
+</div>
